@@ -55,13 +55,17 @@ conf=outputVal;
 conf=conf./max(max(conf));% to make them from 0 to 1;
 
 [loadAll,~,per1,comprt,z]=...
-    patMDS(conf,20,0.0001,[1:60]);
+    patMDS(conf,20,0.0001,[1:59]);
 
 %% 9. computing origin image and distance based on origin. 
-%     Run 1 and 8 first
-var=double(imCell2double(ims(61:120),2));%choosing neutral
+%     FOR HASAN: load confusability matrices of all conditions and ims.
+
+maxVal=length(ims)/2;
+conf=conf_behavioural;
+[loadAll,~,per1,comprt,z]=patMDS(conf,20,0.0001,[1:59]);
+var=double(imCell2double(ims(60:118),2));% choosing neutral. 
 % var=double(imCell2double(ims(1:59),2));%choosing happy
 orig=sqrt(sum(loadAll.^2, 2)); %distance
 orig_norm=orig.*(1/sum(orig, 1)); %normalized distance
-orig_norm_im=sum(var.*repmat(reshape(orig_norm,1,maxVal),size(var,1),1),2);
+orig_norm_im=sum(var.*repmat(reshape(orig_norm,1,maxVal),size(var,1),1),2); % creating origin image
 distVar=sqrt(sum((double(var)-repmat(orig_norm_im,1,maxVal)).^2,1));
