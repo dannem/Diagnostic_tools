@@ -61,7 +61,7 @@ conf=conf./max(max(conf));% to make them from 0 to 1;
 %     FOR HASAN: load confusability matrices of all conditions and ims.
 
 maxVal=length(ims)/2;
-conf=conf_behavioural;
+conf=conf_eeg_620;
 [loadAll,~,per1,comprt,z]=patMDS(conf,20,0.0001,[1:59]);
 var=double(imCell2double(ims(60:118),2));% choosing neutral. 
 % var=double(imCell2double(ims(1:59),2));%choosing happy
